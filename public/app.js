@@ -179,6 +179,17 @@ function aoOptions() {
     .map((i) => `<option value="${esc(i.name)}" data-price="${i.price}">${esc(i.name)} · ${inr(i.price)}</option>`)
     .join('');
 }
+// The last remaining row can't be removed (an order needs >=1 item), so hide
+// its × rather than leaving a dead button. Show all ×'s once there are 2+ rows.
+function syncRemoveButtons() {
+  const rows = aoItems.querySelectorAll('.ao-row');
+  const hide = rows.length <= 1;
+  rows.forEach((r) => {
+    const btn = r.querySelector('.ao-remove');
+    if (btn) btn.style.visibility = hide ? 'hidden' : 'visible';
+  });
+}
+
 function addItemRow() {
   const row = document.createElement('div');
   row.className = 'ao-row';
@@ -187,6 +198,7 @@ function addItemRow() {
     `<input class="ao-qty" type="number" min="1" step="1" value="1" />` +
     `<button type="button" class="ao-remove" aria-label="Remove item">&times;</button>`;
   aoItems.appendChild(row);
+  syncRemoveButtons();
   updateAoTotal();
 }
 function updateAoTotal() {
@@ -215,7 +227,10 @@ aoItems.addEventListener('input', updateAoTotal);
 aoItems.addEventListener('change', updateAoTotal);
 aoItems.addEventListener('click', (e) => {
   if (!e.target.classList.contains('ao-remove')) return;
-  if (aoItems.querySelectorAll('.ao-row').length > 1) e.target.closest('.ao-row').remove();
+  if (aoItems.querySelectorAll('.ao-row').length > 1) {
+    e.target.closest('.ao-row').remove();
+    syncRemoveButtons();
+  }
   updateAoTotal();
 });
 
