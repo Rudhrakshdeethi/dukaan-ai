@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Dukaan AI — demo poster</title>
+<meta name="hz:slide-selector" content=".poster" />
+<meta name="hz:canvas-width" content="1200" />
+<meta name="hz:canvas-height" content="1600" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { display: flex; justify-content: center; align-items: flex-start; background: #eef2f7; }
+
+  .poster {
+    position: relative;
+    width: 1200px;
+    height: 1600px;
+    background: #ffffff;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    color: #0f172a;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* top accent band */
+  .band {
+    position: absolute; top: 0; left: 0; width: 1200px; height: 260px;
+    background: linear-gradient(135deg, #4f46e5 0%, #6366f1 55%, #7c74f0 100%);
+  }
+  .band::after {
+    content: ""; position: absolute; right: -80px; top: -120px;
+    width: 420px; height: 420px; border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+  }
+
+  .content { position: absolute; top: 0; left: 0; width: 1200px; height: 1600px; padding: 72px 90px; }
+
+  /* header / logo */
+  .brand { display: flex; align-items: center; gap: 22px; color: #fff; }
+  .logo { width: 76px; height: 76px; border-radius: 20px; background: rgba(255,255,255,0.16);
+          display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.28); }
+  .wordmark { font-size: 48px; font-weight: 800; letter-spacing: -1.5px; line-height: 1; }
+  .kicker { font-size: 21px; font-weight: 600; color: rgba(255,255,255,0.85); letter-spacing: 2px;
+            text-transform: uppercase; margin-top: 8px; }
+
+  /* headline */
+  .headline { margin-top: 118px; font-size: 78px; font-weight: 800; line-height: 1.02; letter-spacing: -2.5px; color: #0f172a; }
+  .headline .em { color: #4f46e5; }
+  .sub { margin-top: 30px; font-size: 30px; line-height: 1.45; font-weight: 400; color: #475569; max-width: 940px; }
+
+  /* feature chips */
+  .features { margin-top: 46px; display: flex; flex-direction: column; gap: 20px; }
+  .chip { display: flex; align-items: center; gap: 20px; font-size: 27px; font-weight: 600; color: #1e293b; }
+  .dot { width: 46px; height: 46px; border-radius: 12px; background: #eef2ff; color: #4f46e5;
+         display: flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+  .dot svg { width: 26px; height: 26px; }
+
+  /* QR card */
+  .qrcard {
+    position: absolute; left: 90px; bottom: 210px; width: 1020px;
+    background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 28px;
+    padding: 44px 48px; display: flex; align-items: center; gap: 44px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.10);
+  }
+  .qrbox { width: 320px; height: 320px; background: #fff; border-radius: 20px; padding: 18px;
+           border: 1px solid #e2e8f0; flex: 0 0 auto; }
+  .qrbox svg { width: 100%; height: 100%; display: block; }
+  .qrtext { display: flex; flex-direction: column; }
+  .qrtext .scan { font-size: 40px; font-weight: 800; letter-spacing: -1px; line-height: 1.1; }
+  .qrtext .scan .tg { color: #229ED9; }
+  .qrtext .handle { margin-top: 18px; font-size: 27px; font-weight: 600; color: #334155;
+                    background: #eef2ff; border-radius: 12px; padding: 12px 20px; align-self: flex-start; }
+  .qrtext .dash { margin-top: 22px; font-size: 24px; color: #475569; font-weight: 500; }
+  .qrtext .dash b { color: #4f46e5; font-weight: 700; }
+
+  /* footer */
+  .footer { position: absolute; left: 90px; right: 90px; bottom: 78px;
+            display: flex; align-items: center; justify-content: space-between;
+            border-top: 1px solid #e2e8f0; padding-top: 30px; }
+  .footer .built { font-size: 24px; font-weight: 600; color: #334155; }
+  .footer .built span { color: #94a3b8; font-weight: 500; }
+  .footer .tag { font-size: 22px; font-weight: 700; color: #4f46e5; letter-spacing: 0.5px; }
+</style>
+</head>
+<body>
+  <div class="poster" data-canvas-width="1200" data-canvas-height="1600">
+    <div class="band"></div>
+    <div class="content">
+
+      <div class="brand">
+        <div class="logo">
+          <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l1.2-4.2A1 1 0 0 1 5.16 4h13.68a1 1 0 0 1 .96.8L21 9"/>
+            <path d="M3 9h18v2a3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1-3 3 3 3 0 0 1-3-3z"/>
+            <path d="M5 14v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5"/>
+          </svg>
+        </div>
+        <div>
+          <div class="wordmark">Dukaan AI</div>
+          <div class="kicker">Business OS for local shops</div>
+        </div>
+      </div>
+
+      <h1 class="headline">Run your whole shop<br>from a <span class="em">chat.</span></h1>
+      <p class="sub">Record sales by text or voice, snap a supplier bill to update stock, and ask anything about your business — in Hindi, Telugu, Tamil or Hinglish. No app to learn.</p>
+
+      <div class="features">
+        <div class="chip">
+          <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+          Record sales by text or voice
+        </div>
+        <div class="chip">
+          <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></span>
+          Snap a supplier bill to add stock
+        </div>
+        <div class="chip">
+          <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M19 9l-5 5-4-4-3 3"/></svg></span>
+          AI restock forecasts &amp; live dashboard
+        </div>
+      </div>
+
+      <div class="qrcard">
+        <div class="qrbox">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37 37" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h37v37H0z"/><path stroke="#0f172a" d="M4 4.5h7m1 0h1m5 0h1m2 0h1m2 0h1m1 0h7M4 5.5h1m5 0h1m1 0h2m2 0h3m3 0h1m3 0h1m5 0h1M4 6.5h1m1 0h3m1 0h1m2 0h2m2 0h1m1 0h2m2 0h1m1 0h3m1 0h1M4 7.5h1m1 0h3m1 0h1m1 0h2m1 0h1m1 0h1m1 0h3m1 0h1m2 0h1m1 0h3m1 0h1M4 8.5h1m1 0h3m1 0h1m2 0h3m3 0h2m2 0h1m2 0h1m1 0h3m1 0h1M4 9.5h1m5 0h1m4 0h1m2 0h1m2 0h4m1 0h1m5 0h1M4 10.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M12 11.5h1m3 0h1m1 0h1m1 0h2m2 0h1M4 12.5h1m1 0h2m1 0h3m4 0h3m1 0h4m2 0h1m2 0h1m1 0h2M4 13.5h1m4 0h1m1 0h1m1 0h1m1 0h1m1 0h2m1 0h7m1 0h1m3 0h1M4 14.5h1m3 0h1m1 0h2m1 0h1m2 0h2m3 0h1m3 0h2m3 0h2M5 15.5h1m1 0h2m3 0h1m4 0h3m2 0h1m1 0h2m1 0h1m4 0h1M5 16.5h1m2 0h3m4 0h7m1 0h2m4 0h2M6 17.5h1m2 0h1m1 0h1m1 0h1m2 0h1m1 0h4m4 0h1m3 0h3M4 18.5h1m3 0h1m1 0h1m1 0h3m8 0h1m1 0h3m2 0h3M6 19.5h1m1 0h1m2 0h1m1 0h3m4 0h1m2 0h3m1 0h1m3 0h1M6 20.5h1m1 0h1m1 0h3m2 0h1m1 0h1m1 0h1m2 0h4m1 0h3m1 0h1M5 21.5h3m1 0h1m1 0h4m1 0h1m2 0h1m2 0h1m1 0h2m1 0h1m1 0h3M4 22.5h1m2 0h5m1 0h1m1 0h6m3 0h1m5 0h1M6 23.5h4m3 0h1m1 0h2m3 0h2m2 0h2m2 0h1m1 0h1M5 24.5h2m1 0h5m5 0h1m1 0h1m1 0h9M12 25.5h4m2 0h1m1 0h2m2 0h1m3 0h5M4 26.5h7m1 0h5m3 0h1m1 0h3m1 0h1m1 0h2m1 0h1M4 27.5h1m5 0h1m1 0h1m1 0h1m2 0h1m1 0h2m1 0h1m1 0h1m3 0h2M4 28.5h1m1 0h3m1 0h1m5 0h1m4 0h1m2 0h5m1 0h3M4 29.5h1m1 0h3m1 0h1m1 0h1m1 0h2m1 0h9m1 0h3m2 0h1M4 30.5h1m1 0h3m1 0h1m1 0h1m1 0h1m7 0h2m6 0h1m1 0h1M4 31.5h1m5 0h1m2 0h1m2 0h4m2 0h1m1 0h3m1 0h2m1 0h1M4 32.5h7m1 0h1m1 0h3m5 0h5m2 0h1m1 0h1"/></svg>
+        </div>
+        <div class="qrtext">
+          <div class="scan">Scan to try it<br>on <span class="tg">Telegram</span></div>
+          <div class="handle">@dukaan_ai_niat_takeover26_bot</div>
+          <div class="dash">Live dashboard&nbsp;&nbsp;→&nbsp;&nbsp;<b>dukaan-ai-dashboard.vercel.app</b></div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="built">Built for TakeOver&rsquo;26 &nbsp;<span>· NIAT flagship hackathon</span></div>
+        <div class="tag">DUKAAN AI</div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
