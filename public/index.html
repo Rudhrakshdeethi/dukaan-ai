@@ -127,7 +127,27 @@
             </div>
 
             <div class="card">
-              <div class="card-head"><h2>Pending orders</h2><span class="pill-count" id="orders-count">0</span></div>
+              <div class="card-head">
+                <h2>Pending orders</h2>
+                <div class="head-actions">
+                  <span class="pill-count" id="orders-count">0</span>
+                  <button id="add-order-btn" type="button" class="btn btn-sm">+ New order</button>
+                </div>
+              </div>
+
+              <form id="add-order-form" class="add-order" hidden>
+                <input id="ao-customer" class="ao-input" placeholder="Customer name (optional)" autocomplete="off" />
+                <div id="ao-items" class="ao-items"></div>
+                <div class="ao-actions">
+                  <button type="button" id="ao-add-item" class="btn btn-sm">+ Item</button>
+                  <div class="ao-right">
+                    <span class="ao-total" id="ao-total">₹0</span>
+                    <button type="submit" class="btn btn-sm btn-primary">Add order</button>
+                  </div>
+                </div>
+                <p class="ao-msg" id="ao-msg"></p>
+              </form>
+
               <ul id="orders-list" class="mini-list"></ul>
             </div>
 

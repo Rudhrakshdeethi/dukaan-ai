@@ -41,9 +41,55 @@ app.get('/api/state', (_req, res) => {
 // Reset to demo data (handy right before a live demo).
 // Set ADMIN_TOKEN to require an x-admin-token header (protects against public wipes).
 app.post('/api/seed', (req, res) => {
-  const token = process.env.ADMIN_TOKEN;
-  if (token && req.get('x-admin-token') !== token) return res.status(403).json({ error: 'forbidden' });
+  if (!allowWrite(req, res)) return;
   res.json({ inventory: store.seedDemo() });
+});
+
+// Optional write guard: if ADMIN_TOKEN is set, mutating endpoints require the
+// x-admin-token header. Unset (default) = open, convenient for demos.
+function allowWrite(req, res) {
+  const token = process.env.ADMIN_TOKEN;
+  if (token && req.get('x-admin-token') !== token) {
+    res.status(403).json({ error: 'forbidden' });
+    return false;
+  }
+  return true;
+}
+
+// Create a pending order straight from the dashboard (owner logging a
+// walk-in / phone order). Items are validated against live inventory in the store.
+app.post('/api/orders', (req, res) => {
+  if (!allowWrite(req, res)) return;
+  const { customerName, items } = req.body || {};
+  const clean = Array.isArray(items)
+    ? items
+        .map((i) => ({ name: String(i && i.name || '').trim(), qty: Number(i && i.qty) }))
+        .filter((i) => i.name && Number.isFinite(i.qty) && i.qty > 0)
+    : [];
+  if (!clean.length) return res.status(400).json({ error: 'add at least one item with a quantity' });
+  const order = store.createOrder({
+    customerId: 'dashboard',
+    customerName: (customerName && String(customerName).trim()) || 'Walk-in',
+    items: clean,
+  });
+  if (!order.items.length) return res.status(400).json({ error: 'none of those items are in the catalog' });
+  res.json({ order });
+});
+
+// Accept a pending order → deducts stock and records the sale (shows in analytics).
+app.post('/api/orders/:id/accept', (req, res) => {
+  if (!allowWrite(req, res)) return;
+  const result = store.acceptOrder(req.params.id);
+  if (!result) return res.status(404).json({ error: 'order not found or already handled' });
+  res.json(result);
+});
+
+// Reject a pending order (no stock change).
+app.post('/api/orders/:id/reject', (req, res) => {
+  if (!allowWrite(req, res)) return;
+  const order = store.rejectOrder(req.params.id);
+  if (!order) return res.status(404).json({ error: 'order not found or already handled' });
+  res.json({ order });
 });
 
 // Mount WhatsApp webhook (inert until Meta credentials are set).
