@@ -1,0 +1,78 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Kalam:wght@400;700&family=Gaegu&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; padding:24px; background:#6a6a6a; display:flex; flex-wrap:wrap; gap:30px; }
+  .stage { background:#777; padding:16px; }
+  .card { padding:22px; position:relative; overflow:hidden; }
+
+  /* Doctor's Rx pad look */
+  .rx { width:360px; background:#fffdf3; color:#12365f; font-family:'Caveat',cursive; }
+  .rx .head { display:flex; justify-content:space-between; border-bottom:2px solid #12365f; padding-bottom:6px; font-family:system-ui; }
+  .rx .head b { font-size:15px; }
+  .rx .head span { font-size:11px; color:#555; }
+  .rx .symbol { font-size:34px; font-family:serif; font-weight:bold; margin:6px 0 2px; }
+  .rx .line { font-size:26px; line-height:1.5; border-bottom:1px dotted #bcc; }
+  .rx .line:nth-child(odd){ transform:rotate(-0.6deg); }
+  .rx .line:nth-child(even){ transform:rotate(0.5deg); }
+
+  /* very messy scrawl */
+  #r1 .card { filter:contrast(0.8); }
+  #r1 .line { font-family:'Caveat',cursive; }
+
+  /* Hindi handwritten kirana scribble */
+  #r2 .card { background:#f5f3e0; color:#1c1c1c; font-family:'Kalam',cursive; }
+  #r2 .line { font-size:23px; line-height:1.7; border-bottom:1px dashed #c9c4a8; }
+  #r2 .line:nth-child(odd){ transform:rotate(-0.8deg); }
+
+  /* Marathi/Devanagari scribbled + slight blur */
+  #r3 .card { background:#fbfbf0; color:#222; font-family:'Kalam',cursive; filter:blur(0.5px); transform:rotate(-1.5deg); }
+  #r3 .line { font-size:22px; line-height:1.7; border-bottom:1px dotted #ccc; }
+
+  /* Tamil scribble list, faded */
+  #r4 .card { background:#fff; color:#111; font-family:'Gaegu',cursive; filter:contrast(0.7) brightness(1.05); }
+  #r4 .t { font-family:'Nirmala UI',sans-serif; }
+  #r4 .line { font-size:22px; line-height:1.6; border-bottom:1px dashed #ddd; }
+</style></head>
+<body>
+
+  <!-- r1: English doctor's prescription — very scribbled -->
+  <div class="stage" id="r1"><div class="card rx">
+    <div class="head"><div><b>Dr. A. Mehta, MBBS MD</b><br><span>City Care Clinic · Reg 44821</span></div><span>07/07/26</span></div>
+    <div class="symbol">℞</div>
+    <div class="line">1. Tab Azithral 500 &nbsp;— 1 x 5 days</div>
+    <div class="line">2. Cap Amoxyclav 625 — 2 x 7d</div>
+    <div class="line">3. Tab Dolo 650 &nbsp;&nbsp;— SOS x 10</div>
+    <div class="line">4. Syp Ascoril-D &nbsp;— 1 bottle</div>
+    <div class="line">5. Tab Pan-40 &nbsp;&nbsp;&nbsp;— 1 OD x 5</div>
+  </div></div>
+
+  <!-- r2: Hindi handwritten kirana order slip -->
+  <div class="stage" id="r2"><div class="card rx">
+    <div class="head" style="font-family:'Nirmala UI'"><div><b>गुप्ता जनरल स्टोर</b></div><span>ऑर्डर</span></div>
+    <div class="line">आटा — 20 किलो @ 38</div>
+    <div class="line">चावल — 10 किलो @ 55</div>
+    <div class="line">तेल — 5 लीटर @ 145</div>
+    <div class="line">दाल — 8 किलो @ 110</div>
+    <div class="line">नमक — 12 पैकेट @ 20</div>
+  </div></div>
+
+  <!-- r3: Marathi/Devanagari scribble, blurred + rotated -->
+  <div class="stage" id="r3"><div class="card rx">
+    <div class="head" style="font-family:'Nirmala UI'"><div><b>साई किराणा</b></div><span>यादी</span></div>
+    <div class="line">साखर — ३ किलो — ४५</div>
+    <div class="line">चहा पावडर — २ — २८०</div>
+    <div class="line">तूप — १ किलो — ५५०</div>
+    <div class="line">बिस्किट — १० — १०</div>
+  </div></div>
+
+  <!-- r4: Tamil scribbled list, faded -->
+  <div class="stage" id="r4"><div class="card rx">
+    <div class="head" style="font-family:'Nirmala UI'"><div><b class="t">முருகன் ஸ்டோர்</b></div><span class="t">பட்டியல்</span></div>
+    <div class="line t">அரிசி — 25 கிலோ — 55</div>
+    <div class="line t">சர்க்கரை — 5 கிலோ — 45</div>
+    <div class="line t">பருப்பு — 3 கிலோ — 110</div>
+    <div class="line t">எண்ணெய் — 2 லிட்டர் — 160</div>
+  </div></div>
+
+</body></html>

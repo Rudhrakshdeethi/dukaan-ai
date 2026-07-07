@@ -1,0 +1,103 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+  body { margin:0; padding:20px; background:#eee; font-family: system-ui; display:flex; flex-wrap:wrap; gap:24px; }
+  .wrap { background:#fff; padding:0; }
+  .card { padding: 26px; }
+
+  /* 1: Hindi kirana — clean printed table */
+  #b1 .card { width: 380px; background:#fffef8; font-family:'Nirmala UI', sans-serif; color:#1a1a1a; }
+  #b1 table { width:100%; border-collapse:collapse; font-size:17px; }
+  #b1 td { padding:7px 4px; border-bottom:1px solid #ddd; }
+  #b1 .r { text-align:right; }
+
+  /* 2: Pharmacy — English printed with borders */
+  #b2 .card { width: 380px; background:#fff; font-family:'Consolas', monospace; color:#111; border:2px solid #333; }
+  #b2 .row { display:flex; justify-content:space-between; font-size:15px; padding:5px 0; border-bottom:1px dotted #999; }
+
+  /* 3: Telugu vegetables — colored header, table */
+  #b3 .card { width: 380px; background:#f7fff7; font-family:'Nirmala UI', sans-serif; color:#132; }
+  #b3 h3 { background:#2a7; color:#fff; margin:-26px -26px 14px; padding:14px 26px; }
+  #b3 .row { display:flex; justify-content:space-between; font-size:17px; padding:8px 0; border-bottom:1px solid #cec; }
+
+  /* 4: Handwritten Hinglish — messy cursive, rotated */
+  #b4 .card { width: 340px; background:#fbfbe8; font-family:'Segoe Script','Comic Sans MS',cursive; color:#223; transform:rotate(-1.5deg); box-shadow:2px 3px 8px rgba(0,0,0,.2); }
+  #b4 .row { font-size:22px; padding:6px 0; border-bottom:1px dashed #bbb; }
+  #b4 .row:nth-child(3){ transform:rotate(0.8deg); }
+  #b4 .row:nth-child(5){ transform:rotate(-0.6deg); }
+
+  /* 5: Tamil store — thermal-ish */
+  #b5 .card { width: 320px; background:#fff; font-family:'Nirmala UI', monospace; color:#000; font-size:15px; }
+  #b5 .c { text-align:center; }
+  #b5 .row { display:flex; justify-content:space-between; padding:5px 0; }
+  #b5 hr { border:0; border-top:1px dashed #000; }
+
+  /* 6: Snacks thermal receipt — narrow monospace, faded */
+  #b6 .card { width: 280px; background:#fdfdfd; font-family:'Consolas', monospace; color:#333; font-size:14px; letter-spacing:.3px; }
+  #b6 .c { text-align:center; }
+  #b6 .row { display:flex; justify-content:space-between; padding:4px 0; }
+  #b6 hr { border:0; border-top:1px dashed #777; }
+</style></head>
+<body>
+
+  <div class="wrap" id="b1"><div class="card">
+    <h2 style="margin:0">राज किराना स्टोर</h2>
+    <div style="font-size:13px;color:#666">सप्लायर बिल · 07/07/2026</div>
+    <table>
+      <tr><td>चावल (Rice)</td><td class="r">5 किलो</td><td class="r">₹60</td></tr>
+      <tr><td>तूर दाल</td><td class="r">2 किलो</td><td class="r">₹120</td></tr>
+      <tr><td>सरसों तेल</td><td class="r">1 लीटर</td><td class="r">₹150</td></tr>
+      <tr><td>चीनी</td><td class="r">3 किलो</td><td class="r">₹45</td></tr>
+      <tr><td>आटा</td><td class="r">10 किलो</td><td class="r">₹40</td></tr>
+    </table>
+  </div></div>
+
+  <div class="wrap" id="b2"><div class="card">
+    <div style="text-align:center;font-weight:bold;font-size:18px">APOLLO MEDICALS</div>
+    <div style="text-align:center;font-size:12px;margin-bottom:10px">Purchase Invoice</div>
+    <div class="row"><span>Paracetamol 500mg</span><span>x20  Rs 2</span></div>
+    <div class="row"><span>Cough Syrup 100ml</span><span>x5  Rs 85</span></div>
+    <div class="row"><span>Crocin Advance</span><span>x15  Rs 30</span></div>
+    <div class="row"><span>Dettol 250ml</span><span>x8  Rs 75</span></div>
+    <div class="row"><span>Cotton Roll</span><span>x10  Rs 40</span></div>
+  </div></div>
+
+  <div class="wrap" id="b3"><div class="card">
+    <h3>శ్రీ వెంకటేశ్వర కూరగాయలు</h3>
+    <div class="row"><span>టమాటా (Tomato)</span><span>10 kg · ₹30</span></div>
+    <div class="row"><span>ఉల్లిపాయ (Onion)</span><span>8 kg · ₹40</span></div>
+    <div class="row"><span>బంగాళదుంప (Potato)</span><span>12 kg · ₹25</span></div>
+    <div class="row"><span>మిరపకాయ (Chilli)</span><span>3 kg · ₹80</span></div>
+  </div></div>
+
+  <div class="wrap" id="b4"><div class="card">
+    <div style="font-size:20px;font-weight:bold;border-bottom:2px solid #333;padding-bottom:6px">Sharma Kirana - list</div>
+    <div class="row">2 Maggi -- 14</div>
+    <div class="row">5 Parle-G -- 10</div>
+    <div class="row">3 Lays -- 20</div>
+    <div class="row">1 dozen egg -- 84</div>
+    <div class="row">4 Frooti -- 15</div>
+  </div></div>
+
+  <div class="wrap" id="b5"><div class="card">
+    <div class="c" style="font-weight:bold">அன்னை ஸ்டோர்ஸ்</div>
+    <div class="c" style="font-size:12px">Bill / பில்</div>
+    <hr>
+    <div class="row"><span>அரிசி (Rice)</span><span>25kg ₹55</span></div>
+    <div class="row"><span>பருப்பு (Dal)</span><span>5kg ₹110</span></div>
+    <div class="row"><span>எண்ணெய் (Oil)</span><span>2L ₹160</span></div>
+    <div class="row"><span>சர்க்கரை (Sugar)</span><span>4kg ₹45</span></div>
+    <hr>
+  </div></div>
+
+  <div class="wrap" id="b6"><div class="card">
+    <div class="c">*** QUICK MART ***</div>
+    <div class="c" style="font-size:11px">GST RETAIL RECEIPT</div>
+    <hr>
+    <div class="row"><span>COCA COLA 750</span><span>24x 40</span></div>
+    <div class="row"><span>KURKURE MASALA</span><span>50x 10</span></div>
+    <div class="row"><span>DAIRY MILK</span><span>30x 45</span></div>
+    <div class="row"><span>BINGO CHIPS</span><span>40x 20</span></div>
+    <hr>
+  </div></div>
+
+</body></html>

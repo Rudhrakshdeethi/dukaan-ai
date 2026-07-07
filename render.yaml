@@ -1,0 +1,36 @@
+# Render Blueprint — https://render.com/docs/blueprint-spec
+# Deploys the Dukaan AI Express dashboard + Telegram bot as one web service.
+services:
+  - type: web
+    name: dukaan-ai
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    # The dashboard returns HTTP 200 at "/", so Render can health-check it.
+    healthCheckPath: /
+    # Secrets/config are set in the Render dashboard (sync: false = not committed here).
+    envVars:
+      # RENDER_EXTERNAL_URL is injected by Render automatically — when present the bot
+      # runs in webhook mode (Telegram POSTs updates, waking the service). No setup needed.
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      # Optional: a secret to authenticate Telegram's webhook POSTs (recommended in prod).
+      - key: TELEGRAM_WEBHOOK_SECRET
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        sync: false
+      - key: STORE_NAME
+        sync: false
+      - key: TELEGRAM_OWNER_IDS
+        sync: false
+      - key: ADMIN_TOKEN
+        sync: false
+      - key: WHATSAPP_TOKEN
+        sync: false
+      - key: WHATSAPP_PHONE_ID
+        sync: false
+      - key: WHATSAPP_VERIFY_TOKEN
+        sync: false

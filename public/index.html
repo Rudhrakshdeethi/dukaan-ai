@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dukaan AI — Store Console</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">D</div>
+          <div class="brand-text">
+            <strong>Dukaan AI</strong>
+            <span>Store Console</span>
+          </div>
+        </div>
+
+        <nav class="nav">
+          <a class="nav-item active" data-scroll="overview">
+            <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+            Overview
+          </a>
+          <a class="nav-item" data-scroll="inventory">
+            <svg viewBox="0 0 24 24"><path d="M20 2H4c-1 0-2 .9-2 2v3.01c0 .72.43 1.34 1 1.69V20c0 1.1 1.1 2 2 2h14c.9 0 2-.9 2-2V8.7c.57-.35 1-.97 1-1.69V4c0-1.1-1-2-2-2zm-5 12H9v-2h6v2zm5-7H4V4h16v3z"/></svg>
+            Inventory
+          </a>
+          <a class="nav-item" data-scroll="sales">
+            <svg viewBox="0 0 24 24"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/></svg>
+            Sales &amp; Insights
+          </a>
+        </nav>
+
+        <div class="side-status">
+          <div class="status-row">
+            <span class="dot" id="chan-dot"></span>
+            <div>
+              <strong id="chan-name">Telegram</strong>
+              <span class="muted" id="chan-sub">connected</span>
+            </div>
+          </div>
+          <div class="status-row">
+            <span class="dot" id="ai-dot"></span>
+            <div>
+              <strong>AI Engine</strong>
+              <span class="muted" id="ai-sub">Gemini</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <div class="crumb">Overview</div>
+            <h1 id="store-name">Store</h1>
+          </div>
+          <div class="topbar-right">
+            <span class="live"><span class="dot live-dot"></span> Live</span>
+            <span class="date" id="date"></span>
+            <button id="seed" class="btn">Reset demo</button>
+          </div>
+        </header>
+
+        <section class="kpis" id="overview">
+          <div class="kpi">
+            <div class="kpi-top"><span>Revenue today</span>
+              <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+            </div>
+            <div class="kpi-val" id="k-rev">₹0</div>
+            <div class="kpi-sub" id="k-rev-sub">0 orders</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-top"><span>Orders today</span>
+              <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12L8.1 13h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0020 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+            </div>
+            <div class="kpi-val" id="k-ord">0</div>
+            <div class="kpi-sub" id="k-ord-sub">across all items</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-top"><span>Stock value</span>
+              <svg viewBox="0 0 24 24"><path d="M12 2l9 4.9V17L12 22l-9-5V6.9L12 2zm0 2.3L5 8v8l7 3.8L19 16V8l-7-3.7z"/></svg>
+            </div>
+            <div class="kpi-val" id="k-val">₹0</div>
+            <div class="kpi-sub" id="k-items-sub">0 items in catalog</div>
+          </div>
+          <div class="kpi alert">
+            <div class="kpi-top"><span>Low-stock alerts</span>
+              <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+            </div>
+            <div class="kpi-val" id="k-low">0</div>
+            <div class="kpi-sub" id="k-low-sub">all stock healthy</div>
+          </div>
+        </section>
+
+        <section class="grid">
+          <div class="card span-2" id="inventory">
+            <div class="card-head">
+              <h2>Inventory</h2>
+              <input id="search" class="search" placeholder="Search items…" />
+            </div>
+            <div class="table-wrap">
+              <table id="inv">
+                <thead>
+                  <tr><th>Item</th><th>Qty</th><th>Unit price</th><th>Stock value</th><th>Status</th></tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card" id="sales">
+              <div class="card-head"><h2>Top sellers today</h2></div>
+              <canvas id="chart" height="150"></canvas>
+              <p id="chart-empty" class="empty">No sales recorded yet today.</p>
+            </div>
+
+            <div class="card">
+              <div class="card-head"><h2>Pending orders</h2><span class="pill-count" id="orders-count">0</span></div>
+              <ul id="orders-list" class="mini-list"></ul>
+            </div>
+
+            <div class="card">
+              <div class="card-head"><h2>Low stock</h2><span class="pill-count" id="low-count">0</span></div>
+              <ul id="low-list" class="mini-list"></ul>
+            </div>
+
+            <div class="card insights-card">
+              <div class="card-head">
+                <h2>Restock plan <span class="ai-tag">AI</span></h2>
+              </div>
+              <ul id="restock-plan" class="mini-list"></ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="card" id="activity-card">
+          <div class="card-head"><h2>Recent activity</h2><span class="muted" id="updated"></span></div>
+          <ul id="activity" class="feed"></ul>
+        </section>
+
+        <footer class="foot">Dukaan AI · TakeOver'26 — chat-first Business OS for local stores</footer>
+      </main>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

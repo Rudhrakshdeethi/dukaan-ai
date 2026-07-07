@@ -1,0 +1,87 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+  body { margin:0; padding:24px; background:#3a3a3a; display:flex; flex-wrap:wrap; gap:30px; }
+  .stage { background:#555; padding:20px; }
+  .card { padding: 24px; position:relative; overflow:hidden; }
+
+  /* base bill looks */
+  .kirana { width:360px; background:#fffef8; font-family:'Nirmala UI',sans-serif; color:#1a1a1a; }
+  .hand { width:330px; background:#fbfbe8; font-family:'Segoe Script','Comic Sans MS',cursive; color:#223; }
+  .thermal { width:300px; background:#fff; font-family:'Consolas',monospace; color:#111; font-size:14px; }
+  .row { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid #ddd; font-size:16px; }
+  .hand .row { font-size:21px; border-bottom:1px dashed #bbb; }
+  .thermal .row { border-bottom:1px dotted #999; }
+  h2,h3 { margin:0 0 8px; }
+
+  /* ---- DEGRADATIONS ---- */
+  #h1 .card { filter: blur(1.8px); }                               /* blurry / out of focus */
+  #h2 .card { filter: brightness(0.42) contrast(1.15); }           /* dark / low light */
+  #h3 .card { filter: contrast(0.42) brightness(1.15) sepia(.3); } /* faded ink */
+  #h4 .card { transform: rotate(9deg) skewX(9deg) scale(.95); filter: brightness(.9); } /* skewed */
+  #h5 .card { filter: url(#grain) contrast(1.05); }                /* heavy sensor noise */
+  #h6 .card { filter: blur(0.6px) brightness(1.05); }              /* will also be low-res + JPEG-crushed */
+
+  svg { position:absolute; width:0; height:0; }
+</style></head>
+<body>
+
+  <svg><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="n"/>
+    <feColorMatrix in="n" type="saturate" values="0"/>
+    <feComponentTransfer><feFuncA type="linear" slope="0.5"/></feComponentTransfer>
+    <feComposite operator="over" in2="SourceGraphic"/></filter></svg>
+
+  <!-- h1: BLURRY English pharmacy -->
+  <div class="stage" id="h1"><div class="card thermal">
+    <div style="text-align:center;font-weight:bold">APOLLO MEDICALS</div>
+    <div class="row"><span>Paracetamol 500mg</span><span>x20 Rs2</span></div>
+    <div class="row"><span>Cough Syrup 100ml</span><span>x5 Rs85</span></div>
+    <div class="row"><span>Crocin Advance</span><span>x15 Rs30</span></div>
+    <div class="row"><span>Dettol 250ml</span><span>x8 Rs75</span></div>
+  </div></div>
+
+  <!-- h2: DARK / low light Hindi kirana -->
+  <div class="stage" id="h2"><div class="card kirana">
+    <h2>राज किराना स्टोर</h2>
+    <div class="row"><span>चावल (Rice)</span><span>5kg ₹60</span></div>
+    <div class="row"><span>तूर दाल</span><span>2kg ₹120</span></div>
+    <div class="row"><span>सरसों तेल</span><span>1L ₹150</span></div>
+    <div class="row"><span>चीनी</span><span>3kg ₹45</span></div>
+  </div></div>
+
+  <!-- h3: FADED handwritten Hinglish -->
+  <div class="stage" id="h3"><div class="card hand">
+    <div style="font-size:19px;font-weight:bold;border-bottom:2px solid #333">Sharma list</div>
+    <div class="row">2 Maggi -- 14</div>
+    <div class="row">5 Parle-G -- 10</div>
+    <div class="row">3 Lays -- 20</div>
+    <div class="row">1 dozen egg -- 84</div>
+  </div></div>
+
+  <!-- h4: SKEWED Telugu -->
+  <div class="stage" id="h4"><div class="card kirana">
+    <h3 style="color:#2a7">శ్రీ వెంకటేశ్వర కూరగాయలు</h3>
+    <div class="row"><span>టమాటా (Tomato)</span><span>10kg ₹30</span></div>
+    <div class="row"><span>ఉల్లిపాయ (Onion)</span><span>8kg ₹40</span></div>
+    <div class="row"><span>బంగాళదుంప (Potato)</span><span>12kg ₹25</span></div>
+    <div class="row"><span>మిరపకాయ (Chilli)</span><span>3kg ₹80</span></div>
+  </div></div>
+
+  <!-- h5: HEAVY NOISE snacks thermal -->
+  <div class="stage" id="h5"><div class="card thermal">
+    <div style="text-align:center">*** QUICK MART ***</div>
+    <div class="row"><span>COCA COLA 750</span><span>24x 40</span></div>
+    <div class="row"><span>KURKURE MASALA</span><span>50x 10</span></div>
+    <div class="row"><span>DAIRY MILK</span><span>30x 45</span></div>
+    <div class="row"><span>BINGO CHIPS</span><span>40x 20</span></div>
+  </div></div>
+
+  <!-- h6: will be captured tiny + JPEG-crushed (low-res phone photo) -->
+  <div class="stage" id="h6"><div class="card kirana">
+    <h2>Annapurna Stores</h2>
+    <div class="row"><span>Basmati Rice 5kg</span><span>x4 ₹520</span></div>
+    <div class="row"><span>Toor Dal 1kg</span><span>x10 ₹135</span></div>
+    <div class="row"><span>Sunflower Oil 1L</span><span>x6 ₹145</span></div>
+    <div class="row"><span>Amul Butter 100g</span><span>x12 ₹58</span></div>
+  </div></div>
+
+</body></html>
