@@ -34,6 +34,58 @@ const key = (name) => String(name).trim().toLowerCase();
 let counter = Date.now();
 const id = () => `${counter++}`;
 
+// Loose normal form: lowercase, strip anything but letters/numbers, and drop a
+// trailing plural 's' so "Maggi", "maggi ", "Maggis" all collapse together.
+const norm = (name) =>
+  String(name)
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, '')
+    .replace(/s$/, '');
+
+// Levenshtein edit distance — used to forgive small typos like "maggie" vs "maggi".
+function editDistance(a, b) {
+  const m = a.length;
+  const n = b.length;
+  if (!m) return n;
+  if (!n) return m;
+  let prev = Array.from({ length: n + 1 }, (_, j) => j);
+  for (let i = 1; i <= m; i++) {
+    const cur = [i];
+    for (let j = 1; j <= n; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + cost);
+    }
+    prev = cur;
+  }
+  return prev[n];
+}
+
+// Resolve a free-typed name to a real inventory item.
+// 1) exact key, 2) loose normal form, 3) nearest fuzzy match within a small edit
+// distance (so "sold 3 Maggie" still finds "Maggi"). Returns the item or null.
+function resolveItem(name) {
+  const exact = db.items[key(name)];
+  if (exact) return exact;
+
+  const target = norm(name);
+  if (!target) return null;
+
+  let best = null;
+  let bestDist = Infinity;
+  for (const item of Object.values(db.items)) {
+    const cand = norm(item.name);
+    if (cand === target) return item; // same after normalising
+    const dist = editDistance(target, cand);
+    // Allow up to ~25% of the word to differ (min 1 edit), capped at 2 typos.
+    const tolerance = Math.min(2, Math.max(1, Math.floor(target.length * 0.25)));
+    if (dist <= tolerance && dist < bestDist) {
+      best = item;
+      bestDist = dist;
+    }
+  }
+  return best;
+}
+
 // ---- Reads -------------------------------------------------------------
 
 export function getInventory() {
@@ -41,7 +93,7 @@ export function getInventory() {
 }
 
 export function getItem(name) {
-  return db.items[key(name)] || null;
+  return resolveItem(name);
 }
 
 export function getLowStock() {
@@ -108,7 +160,7 @@ export function recordSale(items) {
       missing.push({ name: it.name, reason: 'unclear quantity' });
       continue;
     }
-    const item = db.items[key(it.name)];
+    const item = resolveItem(it.name);
     if (!item) {
       missing.push({ name: it.name, reason: 'not in inventory' });
       continue;
@@ -137,7 +189,7 @@ export function createOrder({ customerId, customerName, items }) {
   const lines = [];
   const unavailable = [];
   for (const it of items) {
-    const item = db.items[key(it.name)];
+    const item = resolveItem(it.name);
     if (item && Number.isFinite(it.qty) && it.qty > 0) {
       lines.push({ key: item.key, name: item.name, qty: it.qty, price: item.price });
     } else {
@@ -191,7 +243,7 @@ export function rejectOrder(orderId) {
 // ---- Catalog edits -----------------------------------------------------
 
 export function setPrice(name, price) {
-  const it = db.items[key(name)];
+  const it = resolveItem(name);
   if (!it) return null;
   it.price = price;
   persist();
@@ -199,7 +251,7 @@ export function setPrice(name, price) {
 }
 
 export function setReorder(name, level) {
-  const it = db.items[key(name)];
+  const it = resolveItem(name);
   if (!it) return null;
   it.lowStock = level;
   persist();
@@ -207,9 +259,9 @@ export function setReorder(name, level) {
 }
 
 export function removeItem(name) {
-  const it = db.items[key(name)];
+  const it = resolveItem(name);
   if (!it) return null;
-  delete db.items[key(name)];
+  delete db.items[it.key];
   persist();
   return it;
 }
